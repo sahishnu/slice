@@ -8,11 +8,10 @@ public class pizzabot {
 
     public static ArrayList<Coords> coordList = new ArrayList<Coords>();
     public static Coords origin = new Coords(0,0);
-    public static String USAGE = "Usage: 'size' 'coordinates'";
+    public static String USAGE = "Usage: java pizzabot 'size' 'coordinates'\n" +
+                                "Ex. java pizzabot '5x5' '(1, 1)' '(2, 2)'";
 
     public static void main(String[] args) {
-
-        //Checks number of arguments
 
         //parses inputs and adds them to an ArrayList
         parseInputs(args);
@@ -49,22 +48,34 @@ public class pizzabot {
         }
 
         //first argument is size of grid
+        try {
         String size = args[0];
-        //parses remaining coordinates
-        for(int i = 1; i < args.length; i++){
-            String coordinate = args[i];
-            int comma = coordinate.indexOf(',');
-            int x = Integer.parseInt(coordinate.substring(1,comma)); //x coordinate
-            int y = Integer.parseInt(coordinate.substring(comma+2,coordinate.length()-1)); //y coordinate
-            Coords coord = new Coords(x,y);
-            coordList.add(coord); //add pair to list
+            int seperator = size.indexOf('x');
+            int length = Integer.parseInt(size.substring(0, seperator));
+            int height = Integer.parseInt(size.substring(seperator + 1, size.length()));
+            //parses remaining coordinates
+            for (int i = 1; i < args.length; i++) {
+                String coordinate = args[i];
+                int comma = coordinate.indexOf(',');
+                int x = Integer.parseInt(coordinate.substring(1, comma)); //x coordinate
+                int y = Integer.parseInt(coordinate.substring(comma + 2, coordinate.length() - 1)); //y coordinate
+                if (x < length && x >= 0 && y < height && y >= 0) {
+                    Coords coord = new Coords(x, y);
+                    coordList.add(coord); //add pair to list
+                } else {
+                    System.out.println("(" + x + "," + y + ") is outside the delivery radius.");
+                }
+            }
+        }catch(Exception e){
+            System.out.println(USAGE); //if error in input format
         }
     }
 
+    //calculate distance between 2 locations
     public static double dist(Coords c1, Coords c2){
         int xdist = (int) Math.pow(c2.x - c1.x, 2);
         int ydist = (int) Math.pow(c2.y - c1.y, 2);
-        double distance = Math.sqrt(xdist + ydist);
+        double distance = Math.sqrt(xdist + ydist); //pythagorean theorem
         return distance;
     }
 
@@ -73,7 +84,7 @@ public class pizzabot {
         int xdist = c2.x - c1.x; //net x distance
         int ydist = c2.y - c1.y; //net y distance
 
-        while(xdist != 0){
+        while(xdist != 0){ //while it is not aligned in x
             if(xdist > 0){
                 System.out.print("E");
                 xdist--;
@@ -82,7 +93,7 @@ public class pizzabot {
                 xdist++;
             }
         }
-        while(ydist != 0){
+        while(ydist != 0){ //while it is not aligned in y
             if(ydist > 0){
                 System.out.print("N");
                 ydist--;
