@@ -68,6 +68,8 @@ public class pizzabot {
             }
         }catch(Exception e){
             System.out.println(USAGE); //if error in input format
+            System.out.println("Description:");
+            System.out.println(e);
         }
     }
 
