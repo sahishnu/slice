@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="14ca6f88-0ed3-495b-a9c3-b53686b5a9f5" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pizzabot.java" afterPath="$PROJECT_DIR$/src/pizzabot.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/readme.md" afterPath="$PROJECT_DIR$/readme.md" />
     </list>
     <ignored path="slice.iws" />
     <ignored path=".idea/workspace.xml" />

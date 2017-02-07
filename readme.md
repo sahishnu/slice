@@ -16,4 +16,9 @@ Iterate through coordinate pairs and print directions. <br>
 	`W: Move west` <br>
 	`D: Drop pizza` <br>
 
+###Classes
+1. Pizzabot <br>
+This is the driver class. It contains 'main' and implements the entire algorithm using many helper functions.
 
+2. Coords <br>
+This is the data structure for holding an x & y pair to form a coordinate. The Pizzabot class creates an array list of Coords.
